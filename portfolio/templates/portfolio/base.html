@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Studio Baca | Jorge Vargas{% endblock %}</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="info_bar">
+    <h1 class="brand_bar">STUDIO BACA &nbsp;&nbsp;&nbsp;</h1>
+    <p class="slogan_bar">Turning raw data into powerful insights</p>
+    <nav class="details_bar">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+  <p class="footer_text">© 2025 Jorge Vargas · Studio Baca · Built with Django</p>
+</footer>
+</body>
+</html>
