@@ -1,0 +1,25 @@
+<!-- contact.html -->
+<section class="max-w-2xl mx-auto py-12 px-6 text-gray-800">
+  <h2 class="text-3xl font-bold mb-6 text-center">Get in Touch</h2>
+
+  {% if success %}
+    <div class="bg-green-100 text-green-800 p-4 rounded mb-6 text-center">
+      Your message has been sent successfully!
+    </div>
+  {% endif %}
+
+  <form method="post" class="space-y-6">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 border rounded" value="{{ form.name.value|default_if_none:'' }}">
+    <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 border rounded" value="{{ form.email.value|default_if_none:'' }}">
+    <textarea name="message" rows="6" placeholder="Your Message" required class="w-full p-3 border rounded">{{ form.message.value }}</textarea>
+
+    <!-- Honeypot (hidden) -->
+    {{ form.honeypot }}
+
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded">
+      Send Message
+    </button>
+  </form>
+</section>

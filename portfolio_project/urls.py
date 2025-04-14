@@ -17,15 +17,24 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from portfolio.views import home
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
 
     path("admin/", admin.site.urls),
-    path('', home, name='home'),
+
 ]
 
 # Serve static files during development
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+from django.urls import path, include
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('portfolio.urls')),  # 👈 This includes your app’s routes
+]
