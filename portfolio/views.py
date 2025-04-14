@@ -1,7 +1,9 @@
-from django.core.mail import send_mail
 from django.shortcuts import render
+from django.core.mail import send_mail
 from .forms import ContactForm
 
+def home(request):
+    return render(request, 'portfolio/home.html')  # Or 'portfolio/home.html' if it's inside a subfolder
 
 def contact_view(request):
     success = False
@@ -25,4 +27,4 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    return render(request, "contact.html", {"form": form, "success": success})
+    return render(request, "portfolio/contact.html", {"form": form, "success": success})
