@@ -196,38 +196,59 @@
 
     <hr class="section-divider">
 
-    <section id="contact" class="px-6 py-20 max-w-4xl mx-auto" data-aos="fade-up">
-        <h3 class="text-3xl font-bold text-gray-800 mb-10 text-center">Get in Touch</h3>
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto py-20 px-6">
+        <h3 class="text-3xl font-bold text-gray-800 mb-10">Get in Touch</h3>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+        {% if success %}
+            <div class="bg-green-100 text-green-800 border border-green-300 p-4 rounded text-center mb-8">
+                ✅ Your message has been sent successfully!
+            </div>
+        {% endif %}
 
-            <!-- Email -->
-            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                <p class="text-sm text-gray-500 mb-2 uppercase tracking-wide">Email</p>
-                <a href="mailto:your@email.com" class="text-teal-600 font-semibold hover:underline break-all">
-                    your@email.com
-                </a>
+        <form method="post" class="grid grid-cols-1 gap-6 bg-white rounded-2xl shadow p-8 border border-gray-200">
+            {% csrf_token %}
+            {{ form.honeypot }}
+
+            <div>
+                <label for="id_name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                <input type="text" name="name" id="id_name" required
+                       class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:border-indigo-400"
+                       value="{{ form.name.value|default_if_none:'' }}">
             </div>
 
-            <!-- LinkedIn -->
-            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                <p class="text-sm text-gray-500 mb-2 uppercase tracking-wide">LinkedIn</p>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank"
-                   class="text-teal-600 font-semibold hover:underline">
-                    linkedin.com/in/yourprofile
-                </a>
+            <div>
+                <label for="id_email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                <input type="email" name="email" id="id_email" required
+                       class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:border-indigo-400"
+                       value="{{ form.email.value|default_if_none:'' }}">
             </div>
 
-            <!-- GitHub -->
-            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
-                <p class="text-sm text-gray-500 mb-2 uppercase tracking-wide">GitHub</p>
-                <a href="https://github.com/yourusername" target="_blank"
-                   class="text-teal-600 font-semibold hover:underline">
-                    github.com/yourusername
-                </a>
+            <div>
+                <label for="id_message" class="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                <textarea name="message" id="id_message" rows="6" required
+                          class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:border-indigo-400">{{ form.message.value }}</textarea>
             </div>
 
-        </div>
+            <!-- Submit Button -->
+            <div class="text-center mt-4">
+                <button id="sendBtn" type="submit"
+                        class="inline-block bg-gray-800 hover:bg-gray-700 text-white font-medium px-4 py-2 rounded-lg transition duration-200">
+                    Send Message
+                </button>
+            </div>
+        </form>
     </section>
+
+    <script>
+        const sendBtn = document.getElementById('sendBtn');
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function () {
+                sendBtn.innerText = 'Sending...';
+                sendBtn.disabled = true;
+                sendBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+        }
+    </script>
 
 {% endblock %}

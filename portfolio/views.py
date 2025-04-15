@@ -1,10 +1,14 @@
+# portfolio/views.py
+
 from django.shortcuts import render
 from django.core.mail import send_mail
 from .forms import ContactForm
 
+# Homepage view
 def home(request):
-    return render(request, 'portfolio/home.html')  # Or 'portfolio/home.html' if it's inside a subfolder
+    return render(request, 'portfolio/home.html')  # Make sure this file exists: portfolio/templates/home.html
 
+# Contact form view
 def contact_view(request):
     success = False
 
